@@ -18,7 +18,10 @@ namespace GmcBankApi.Controllers
         {
             this.bank = bank;
         }
-
+        /// <summary>
+        /// Get Full information about the bank
+        /// </summary>
+        /// <returns></returns>
         // GET: api/Bank
         [HttpGet]
         public ActionResult GetAll()
@@ -42,13 +45,7 @@ namespace GmcBankApi.Controllers
             return Ok(b);
         }
 
-        // GET: api/Bank/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
+       
         /// <summary>
         /// Create new bank 
         /// </summary>
@@ -93,6 +90,11 @@ namespace GmcBankApi.Controllers
             return Ok(b);
         }
 
+        /// <summary>
+        /// add number of agents 
+        /// </summary>
+        /// <param name="number">number of agents</param>
+        /// <returns></returns>
         [HttpPost("addAgent/{number}")]
         public ActionResult addManyAgent(int number )
         {
