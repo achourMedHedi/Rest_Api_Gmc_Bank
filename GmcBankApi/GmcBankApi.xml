@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GmcBankApi</name>
+    </assembly>
+    <members>
+        <member name="M:GmcBankApi.Controllers.BankController.GetAll">
+            <summary>
+            Get Full information about the bank
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GmcBankApi.Controllers.BankController.Create(GmcBankApi.BankModel)">
+            <summary>
+            Create new bank 
+            </summary>
+            <param name="payLoad">bank model</param>
+            <returns></returns>
+        </member>
+        <member name="M:GmcBankApi.Controllers.BankController.addOneAgent">
+            <summary>
+            add one agent
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GmcBankApi.Controllers.BankController.addManyAgent(System.Int32)">
+            <summary>
+            add number of agents 
+            </summary>
+            <param name="number">number of agents</param>
+            <returns></returns>
+        </member>
+        <member name="M:GmcBankApi.Controllers.BankController.Put(GmcBankApi.BankModel)">
+            <summary>
+            edit Bank Name / swiftCode
+            </summary>
+            <param name="payLoad">Bank model </param>
+            <returns></returns>
+        </member>
+        <member name="M:GmcBankApi.Controllers.BankController.DeleteAgent(System.Int32)">
+            <summary>
+            remove number of agents 
+            </summary>
+            <param name="id">number of agents</param>
+        </member>
+        <member name="M:GmcBankApi.Controllers.ClientController.GetClients">
+            <summary>
+            Get all clients 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GmcBankApi.Controllers.ClientController.GetClient(System.Int32)">
+            <summary>
+            Get Client based on his Cin 
+            </summary>
+            <param name="id">Cin number</param>
+            <returns></returns>
+        </member>
+        <member name="M:GmcBankApi.Controllers.ClientController.Post(GmcBankApi.Models.ClientModel)">
+            <summary>
+            create new client 
+            </summary>
+            <param name="payload">client model</param>
+            <returns></returns>
+        </member>
+        <member name="M:GmcBankApi.Controllers.ClientController.Put(System.Int32,GmcBankApi.Models.ClientModel)">
+            <summary>
+            update a client
+            </summary>
+            <param name="id">cin number </param>
+            <param name="payload">Client model </param>
+            <returns></returns>
+        </member>
+        <member name="M:GmcBankApi.Controllers.ClientController.Delete(System.Int32)">
+            <summary>
+            close a client 
+            </summary>
+            <param name="id">cin number</param>
+        </member>
+        <member name="M:GmcBank.AbsctractAccount`1.GetTransactionsByQuery(System.String)">
+            <summary>
+            Dynamic linq :/
+            </summary>
+            <param name="exp"></param>
+            <returns></returns>
+        </member>
+        <member name="M:GmcBank.Bank`3.AddTransaction(`2)">
+            <summary>
+            add transaction to the Queue 
+            and test if there an agents to execute the transaction 
+            send money from sender and credit the receiver
+            </summary>
+        </member>
+    </members>
+</doc>
