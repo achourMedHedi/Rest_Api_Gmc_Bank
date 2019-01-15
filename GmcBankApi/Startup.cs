@@ -22,7 +22,7 @@ namespace GmcBankApi
         public void ConfigureServices(IServiceCollection services)
         {
             services
-             .AddScoped<IBank<GmcBank.Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction> , Bank<Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction>>();
+             .AddScoped<IBank<Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction> , Bank<Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction>>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

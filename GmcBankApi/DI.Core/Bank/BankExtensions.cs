@@ -11,7 +11,7 @@ namespace GmcBank
     {
         public static void AddClient(this Bank<Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction> bank, Client<AbsctractAccount<Transaction>, Transaction> client )
         {
-            bank.Clients.Add(client);
+            bank.Clients.Add(client); 
         }
         public static Client<AbsctractAccount<Transaction>, Transaction> GetClient(this Bank<Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction> bank, long nbClient)
         {

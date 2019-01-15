@@ -151,7 +151,7 @@ namespace GmcBank
         }
         //save file
         [Auther(name = "achour")]
-        public void SaveFile(string path=@"C:\Users\achou\source\repos\GmcBank\GmcBank\data.json")
+        public void SaveFile(string path)
         {
             MemoryStream stream = new MemoryStream();
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(Bank<TClient, TAbsctractAccount, TTransaction>)) ;
