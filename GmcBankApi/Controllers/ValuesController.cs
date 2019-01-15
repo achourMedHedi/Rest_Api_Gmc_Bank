@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GmcBank;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GmcBankApi.Controllers
@@ -10,15 +11,23 @@ namespace GmcBankApi.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+
+        IBank<Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction> bank;
+
+        public ValuesController(IBank<Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction> bank)
+        {
+            this.bank = bank;
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Ok(bank.LoadFile(@"C:\Users\achou\source\repos\GmcBankApi\GmcBankApi\Data.json"));
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
+        [HttpGet("{ id}")]
         public ActionResult<string> Get(int id)
         {
             return "value";
@@ -26,8 +35,14 @@ namespace GmcBankApi.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] BankModel value)
         {
+            var bank = new Bank<Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction>();
+            bank.name = value.name;
+            bank.swiftCode = value.swiftCode;
+            bank.agent = 1;
+            bank.SaveFile(@"C:\Users\achou\source\repos\GmcBankApi\GmcBankApi\Data.json");
+            return Ok(bank);
         }
 
         // PUT api/values/5
