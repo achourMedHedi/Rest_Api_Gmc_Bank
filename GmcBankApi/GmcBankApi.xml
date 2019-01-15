@@ -4,10 +4,19 @@
         <name>GmcBankApi</name>
     </assembly>
     <members>
+        <member name="M:GmcBankApi.Controllers.AccountController.GetAccounts">
+            <summary>
+            Get All accounts 
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:GmcBankApi.Controllers.BankController.GetAll">
             <summary>
             Get Full information about the bank
             </summary>
+            <response code="200"> success ya m3alem</response>
+            <response code="404"> file not found</response>
+            <response code="400"> file empty</response>
             <returns></returns>
         </member>
         <member name="M:GmcBankApi.Controllers.BankController.Create(GmcBankApi.BankModel)">
@@ -47,7 +56,7 @@
             <summary>
             Get all clients 
             </summary>
-            <returns></returns>
+            <returns>list of all client in the bank</returns>
         </member>
         <member name="M:GmcBankApi.Controllers.ClientController.GetClient(System.Int32)">
             <summary>
@@ -61,6 +70,9 @@
             create new client 
             </summary>
             <param name="payload">client model</param>
+            <response code="200"> success ya m3alem</response>
+            <response code="404"> not found mafamech</response>
+            <response code="401"> Unauthorized access Arja3 8odwa </response>
             <returns></returns>
         </member>
         <member name="M:GmcBankApi.Controllers.ClientController.Put(System.Int32,GmcBankApi.Models.ClientModel)">
@@ -69,6 +81,9 @@
             </summary>
             <param name="id">cin number </param>
             <param name="payload">Client model </param>
+            <response code="200"> success ya m3alem</response>
+            <response code="404"> not found mafamech</response>
+            <response code="401"> Unauthorized access Arja3 8odwa </response>
             <returns></returns>
         </member>
         <member name="M:GmcBankApi.Controllers.ClientController.Delete(System.Int32)">
@@ -76,6 +91,9 @@
             close a client 
             </summary>
             <param name="id">cin number</param>
+            <response code="200"> success ya m3alem</response>
+            <response code="404"> not found mafamech</response>
+            <response code="401"> Unauthorized access Arja3 8odwa </response>
         </member>
         <member name="M:GmcBank.AbsctractAccount`1.GetTransactionsByQuery(System.String)">
             <summary>

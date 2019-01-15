@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using GmcBank;
 using Microsoft.AspNetCore.Http;
@@ -21,8 +22,14 @@ namespace GmcBankApi.Controllers
         /// <summary>
         /// Get Full information about the bank
         /// </summary>
+        /// <response code="200"> success ya m3alem</response>
+        /// <response code="404"> file not found</response>
+        /// <response code="400"> file empty</response>
         /// <returns></returns>
         // GET: api/Bank
+        [ProducesResponseType(typeof(Bank<Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [HttpGet]
         public ActionResult GetAll()
         {
@@ -32,12 +39,12 @@ namespace GmcBankApi.Controllers
                 b = bank.LoadFile(@"C:\Users\achou\source\repos\GmcBankApi\GmcBankApi\Data.json");
                 if (b.name == null)
                 {
-                    return Content("please Create a new bank");
+                    return BadRequest();
                 }
             }
             catch (Exception e)
             {
-                return Content("file not found " + e);
+                return NotFound(e);
 
             }
 

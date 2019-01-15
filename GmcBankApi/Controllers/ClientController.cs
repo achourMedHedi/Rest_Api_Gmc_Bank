@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using GmcBank;
 using GmcBankApi.Models;
@@ -23,7 +24,7 @@ namespace GmcBankApi.Controllers
         /// <summary>
         /// Get all clients 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>list of all client in the bank</returns>
 
         // GET : api/Client
         [HttpGet]
@@ -52,8 +53,12 @@ namespace GmcBankApi.Controllers
         /// create new client 
         /// </summary>
         /// <param name="payload">client model</param>
+        /// <response code="200"> success ya m3alem</response>
+        /// <response code="404"> not found mafamech</response>
+        /// <response code="401"> Unauthorized access Arja3 8odwa </response>
         /// <returns></returns>
         // POST: api/Client
+        [ProducesResponseType(typeof(Client<AbsctractAccount<Transaction>, Transaction>), (int)HttpStatusCode.OK)]
         [HttpPost]  
         public ActionResult Post([FromBody] ClientModel payload)
         {
@@ -68,8 +73,13 @@ namespace GmcBankApi.Controllers
         /// </summary>
         /// <param name="id">cin number </param>
         /// <param name="payload">Client model </param>
+        /// <response code="200"> success ya m3alem</response>
+        /// <response code="404"> not found mafamech</response>
+        /// <response code="401"> Unauthorized access Arja3 8odwa </response>
         /// <returns></returns>
         // PUT: api/Client/{id}
+        [ProducesResponseType(typeof(Client<AbsctractAccount<Transaction>, Transaction>), (int)HttpStatusCode.OK)]
+
         [HttpPut("{id}")]
         public ActionResult Put(int id, [FromBody] ClientModel payload)
         {
@@ -85,7 +95,12 @@ namespace GmcBankApi.Controllers
         /// close a client 
         /// </summary>
         /// <param name="id">cin number</param>
+        /// <response code="200"> success ya m3alem</response>
+        /// <response code="404"> not found mafamech</response>
+        /// <response code="401"> Unauthorized access Arja3 8odwa </response>
         // DELETE: api/ApiWithActions/5
+        [ProducesResponseType(typeof(Client<AbsctractAccount<Transaction>, Transaction>), (int)HttpStatusCode.OK)]
+
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
