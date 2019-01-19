@@ -10,6 +10,19 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:GmcBankApi.Controllers.AccountController.GetAccount(System.Int64)">
+            <summary>
+            Get one account
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:GmcBankApi.Controllers.AccountController.Post(GmcBankApi.Models.AccountModel)">
+            <summary>
+            create new account
+            </summary>
+            <param name="payload">accountModel</param>
+            <returns></returns>
+        </member>
         <member name="M:GmcBankApi.Controllers.BankController.GetAll">
             <summary>
             Get Full information about the bank
@@ -107,6 +120,16 @@
             add transaction to the Queue 
             and test if there an agents to execute the transaction 
             send money from sender and credit the receiver
+            </summary>
+        </member>
+        <member name="P:GmcBank.Client`2.name">
+            <summary>
+            name of the client
+            </summary>
+        </member>
+        <member name="P:GmcBank.Client`2.cin">
+            <summary>
+            cin number must be 8 numbers
             </summary>
         </member>
     </members>

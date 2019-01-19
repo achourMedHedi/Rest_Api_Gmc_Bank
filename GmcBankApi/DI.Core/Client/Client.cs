@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 
@@ -11,10 +12,19 @@ namespace GmcBank
         where TAbstractAccount : AbsctractAccount<TTransaction>
         where TTransaction : Transaction
     {
+        /// <summary>
+        /// name of the client
+        /// </summary>
         [DataMember]
         public string name { get; set; }
+
+        /// <summary>
+        /// cin number must be 8 numbers
+        /// </summary>
         [DataMember]
         public int cin { get; set; }
+
+
         [DataMember]
         public Lazy<Dictionary<long, TAbstractAccount>> accounts; 
 
@@ -40,6 +50,10 @@ namespace GmcBank
         {
             accounts.Value[account.accountNumber].state = "Closed";
         }
+        public void DeleteAccount(TAbstractAccount account)
+        {
+            accounts.Value.Remove(account.accountNumber);
+        }
 
         public void CreateAccount(TAbstractAccount a)
         {
@@ -48,7 +62,8 @@ namespace GmcBank
 
         public TAbstractAccount GetAccount(long accountNumber)
         {
-            throw new NotImplementedException();
+            var result = (from a in accounts.Value.Values where a.accountNumber.Equals(accountNumber) select a).FirstOrDefault();
+            return result;
         }
 
       

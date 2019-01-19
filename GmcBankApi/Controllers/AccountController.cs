@@ -38,14 +38,27 @@ namespace GmcBankApi.Controllers
             }
         }
 
-        
-        // GET: api/Account/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        /// <summary>
+        /// Get one account
+        /// </summary>
+        /// <returns></returns>
+        // GET: api/Account/{id}
+        [HttpGet("{id}")]
+        public IEnumerable<AbsctractAccount<Transaction>> GetAccount(long id)
         {
-            return "value";
+            Bank<Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction> b = bank.LoadFile(@"C:\Users\achou\source\repos\GmcBankApi\GmcBankApi\Data.json");
+            foreach (Client<AbsctractAccount<Transaction>, Transaction> client in b.Clients)
+            {
+                yield return client.GetAccount(id);
+            }
         }
 
+        
+        /// <summary>
+        /// create new account
+        /// </summary>
+        /// <param name="payload">accountModel</param>
+        /// <returns></returns>
         // POST: api/Account
         [HttpPost]
         public ActionResult Post([FromBody] AccountModel payload)
@@ -81,14 +94,86 @@ namespace GmcBankApi.Controllers
 
         // PUT: api/Account/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult Put(int id, [FromBody] AccountModel payload)
         {
+            AbsctractAccount<Transaction> result = null;
+            Bank<Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction> b = bank.LoadFile(@"C:\Users\achou\source\repos\GmcBankApi\GmcBankApi\Data.json");
+            foreach (Client<AbsctractAccount<Transaction>, Transaction> client in b.Clients)
+            {
+                result =  client.GetAccount(id);
+                if (result != null)
+                {
+                    result.accountNumber = payload.accountNumber;
+                    result.TaxRatio = payload.type == "business" ? 0.01 : 0.1;
+                }
+            }
+            b.SaveFile(@"C:\Users\achou\source\repos\GmcBankApi\GmcBankApi\Data.json");
+            return Ok(result);
+        }
+    
+
+        // DELETE: api/account/id
+        [HttpPut("close/{id}")]
+        public ActionResult Close(long id)
+        {
+            bool deleted = false;
+
+            Bank<Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction> b = bank.LoadFile(@"C:\Users\achou\source\repos\GmcBankApi\GmcBankApi\Data.json");
+            foreach (Client<AbsctractAccount<Transaction>, Transaction> client in b.Clients)
+            {
+                AbsctractAccount<Transaction> a = (from account in client.GetAllAccounts() where account.accountNumber == id select account).FirstOrDefault();
+                try
+                {
+                    client.CloseAccount(a);
+                    deleted = true;
+
+                }
+                catch (Exception e)
+                {
+                    continue;
+                }
+
+
+            }
+            b.SaveFile(@"C:\Users\achou\source\repos\GmcBankApi\GmcBankApi\Data.json");
+            if (deleted == false)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // DELETE: api/account/id
+        [HttpDelete("delete/{id}")]
+        public ActionResult Delete(long id)
         {
+            bool deleted = false;
+
+            Bank<Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction> b = bank.LoadFile(@"C:\Users\achou\source\repos\GmcBankApi\GmcBankApi\Data.json");
+            foreach (Client<AbsctractAccount<Transaction>, Transaction> client in b.Clients)
+            {
+                AbsctractAccount<Transaction> a = (from account in client.GetAllAccounts() where account.accountNumber == id select account).FirstOrDefault();
+                try
+                {
+                    client.DeleteAccount(a);
+                    deleted = true;
+
+                }
+                catch (Exception e)
+                {
+                    continue;
+                }
+
+
+            }
+            b.SaveFile(@"C:\Users\achou\source\repos\GmcBankApi\GmcBankApi\Data.json");
+            if (deleted == false)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
         }
     }
 }
