@@ -47,9 +47,13 @@ namespace GmcBankApi.Controllers
                 return NotFound(e);
 
             }
+           
+            var greeter = new TestNeo4j("bolt://localhost:7687", "neo4j", "Aze123qsd456");
+            
+            //string result = greeter.PrintGreeting();
+            
 
-
-            return Ok(b);
+            return Ok(greeter.PrintGreeting());
         }
 
        

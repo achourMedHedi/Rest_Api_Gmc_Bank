@@ -1,14 +1,17 @@
 ﻿
 using GmcBank;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.IO;
 using System.Reflection;
+using System.Text;
 
 namespace GmcBankApi
 {
@@ -24,6 +27,37 @@ namespace GmcBankApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //string securityKey = "Hello achour";
+            //var signingKey = new SymmetricSecurityKey(
+            //   Encoding.UTF8.GetBytes(securityKey));
+
+
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //    .AddJwtBearer(options =>
+            //    {
+
+            //        options.TokenValidationParameters = new TokenValidationParameters
+            //        {
+            //            // Clock skew compensates for server time drift.
+            //            // We recommend 5 minutes or less:
+            //            ClockSkew = TimeSpan.FromMinutes(5),
+            //            // Specify the key used to sign the token:
+            //            IssuerSigningKey = signingKey,
+
+            //            RequireSignedTokens = true,
+            //            // Ensure the token hasn't expired:
+            //            RequireExpirationTime = true,
+            //            ValidateLifetime = true,
+            //            // Ensure the token audience matches our audience value (default true):
+            //            ValidateAudience = true,
+            //            ValidAudience = Configuration["Auth:Audience"],
+            //            // Ensure the token was issued by a trusted authorization server (default true):
+            //            ValidateIssuer = true,
+            //            ValidIssuer = Configuration["Auth:Issuer"]
+            //        };
+            //    });
+
+            // injecting bank dependency 
             services
              .AddScoped<IBank<Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction> , Bank<Client<AbsctractAccount<Transaction>, Transaction>, AbsctractAccount<Transaction>, Transaction>>();
 
@@ -33,19 +67,19 @@ namespace GmcBankApi
                 c.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
-                    Title = "Dhabout Lguerda API",
-                    Description = "Wadh3iyet jane7 el ta2ira \\_",
-                    TermsOfService = "Nik ala 3ajla bil volant",
+                    Title = "gmc bank API",
+                    Description = "dunno \\_",
+                    TermsOfService = "",
                     Contact = new Contact
                     {
-                        Name = "Taxiste",
+                        Name = "arsslen",
                         Email = string.Empty,
-                        Url = "http://achour.69"
+                        Url = "http://achour.101"
                     },
                     License = new License
                     {
-                        Name = "Ja3bou ma7loul",
-                        Url = "https://sami-forja.xxx/permis"
+                        Name = "mine",
+                        Url = "https://mochtawa.wow"
                     }
                 });
                 // Set the comments path for the Swagger JSON and UI.
